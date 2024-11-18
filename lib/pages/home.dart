@@ -6,11 +6,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  static const List<Widget> _pages = <Widget>[
-    ClimbingPage(),
-    Text('Work in progress'),
-    Text('Work in progress'),
-    Text('Work in progress'),
+  static final List<Widget> _pages = <Widget>[
+    const ClimbingPage(),
+    Container(height: 2000, width: 2000, color: Colors.red, child: const Center(child: Text('Work in progress', style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600)))),
+    Container(height: 2000, width: 2000, color: Colors.green, child: const Center(child: Text('Work in progress', style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600)))),
+    Container(height: 2000, width: 2000, color: Colors.yellow, child: const Center(child: Text('Work in progress', style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600)))),
   ];
 
   @override
@@ -58,19 +58,43 @@ class NavBar extends StatelessWidget {
       child: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/climbing.svg', color: selectedIndex==0?MyColors.pink : MyColors.lightBlack),
+            icon: SvgPicture.asset(
+              'assets/icons/climbing.svg',
+              colorFilter: ColorFilter.mode(
+                selectedIndex == 0 ? MyColors.pink : MyColors.lightBlack,
+                BlendMode.srcIn,
+              ),
+            ),
             label: 'Climbing',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/training.svg', color: selectedIndex==1?MyColors.pink : MyColors.lightBlack),
+            icon: SvgPicture.asset(
+              'assets/icons/training.svg',
+              colorFilter: ColorFilter.mode(
+                selectedIndex == 1 ? MyColors.pink : MyColors.lightBlack,
+                BlendMode.srcIn,
+              ),
+            ),
             label: 'Training',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/stats.svg', color: selectedIndex==2?MyColors.pink : MyColors.lightBlack),
+            icon: SvgPicture.asset(
+              'assets/icons/stats.svg',
+              colorFilter: ColorFilter.mode(
+                selectedIndex == 2 ? MyColors.pink : MyColors.lightBlack,
+                BlendMode.srcIn,
+              ),
+            ),
             label: 'Stats',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/assessments.svg', color: selectedIndex==3?MyColors.pink : MyColors.lightBlack),
+            icon: SvgPicture.asset(
+              'assets/icons/assessments.svg',
+              colorFilter: ColorFilter.mode(
+                selectedIndex == 3 ? MyColors.pink : MyColors.lightBlack,
+                BlendMode.srcIn,
+              ),
+            ),
             label: 'Assessments',
           ),
         ],
