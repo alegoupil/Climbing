@@ -23,6 +23,7 @@ class MyColors{
   static const lightBlack =  Color(0xFF4F4F4F);
   static const pink =  Color(0xFFCD60C2);
   static const almostWhite =  Color(0xFFF9F9F9);
+  static const almostBlack =  Color(0xFF1E1E1E);
   static get pinkBackground => const Color(0x26FF70F1);
   static const disactiveGrey =  Color(0xFFAAAAAA);
 }

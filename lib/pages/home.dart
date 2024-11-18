@@ -1,75 +1,81 @@
 import 'package:climbing/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:climbing/pages/climbing.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: MyColors.almostWhite,
-      bottomNavigationBar: NavBar(),
-      body: Center(
-        child: Column (
-          children: [
-            Text("Work in progress", style: TextStyle(fontSize: 30, color: Colors.black)),
-          ],
-          )
-        ),
-    );
-  }
-}
-
-class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  static const List<Widget> _pages = <Widget>[
+    ClimbingPage(),
+    Text('Work in progress'),
+    Text('Work in progress'),
+    Text('Work in progress'),
+  ];
 
   @override
-  State<NavBar> createState() => _NavBarState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _NavBarState extends State<NavBar> {
+class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        // elevation: 0.0,
-        items: const <BottomNavigationBarItem>[ //les icons sont bien moches
+    return Scaffold(
+      backgroundColor: MyColors.almostWhite,
+      bottomNavigationBar: NavBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
+      body: Center(
+        child: HomePage._pages.elementAt(_selectedIndex),
+      ),
+    );
+  }
+}
+
+class NavBar extends StatelessWidget {
+  final int selectedIndex;
+  final ValueChanged<int> onItemTapped;
+
+  const NavBar({
+    required this.selectedIndex,
+    required this.onItemTapped,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 75,
+      child: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.access_time,
-              weight: 4,
-            ),
+            icon: SvgPicture.asset('assets/icons/climbing.svg', color: selectedIndex==0?MyColors.pink : MyColors.lightBlack),
             label: 'Climbing',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.fitness_center,
-              ),
+            icon: SvgPicture.asset('assets/icons/training.svg', color: selectedIndex==1?MyColors.pink : MyColors.lightBlack),
             label: 'Training',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.bar_chart_rounded,
-              ),
+            icon: SvgPicture.asset('assets/icons/stats.svg', color: selectedIndex==2?MyColors.pink : MyColors.lightBlack),
             label: 'Stats',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.check_rounded,
-            ),
+            icon: SvgPicture.asset('assets/icons/assessments.svg', color: selectedIndex==3?MyColors.pink : MyColors.lightBlack),
             label: 'Assessments',
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-
+        currentIndex: selectedIndex,
+        onTap: onItemTapped,
         backgroundColor: Colors.white,
         unselectedItemColor: MyColors.lightBlack,
         unselectedFontSize: 15,
@@ -78,6 +84,7 @@ class _NavBarState extends State<NavBar> {
         selectedLabelStyle: const TextStyle(letterSpacing: -0.32),
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
-        );
+      ),
+    );
   }
 }
